@@ -18,15 +18,15 @@ O **Vio Finanças** foi criado para reunir as principais informações da vida f
 
 ### 🔐 Uma entrada para o seu espaço
 
-![Tela de entrada do Vio Finanças, com design escuro em tons de roxo](screenshots/acesso.png)
+![Prévia ilustrativa da tela de entrada do Vio Finanças, com design escuro em tons de roxo](screenshots/acesso.svg)
 
 A página inicial apresenta uma experiência limpa e moderna, com opções de **entrar** ou **criar uma conta**. Cada usuário possui seu próprio espaço financeiro.
 
 ### 📊 Seu dinheiro em perspectiva
 
-![Prévia da interface do dashboard Vio Finanças, com cartões de saldo, receitas, despesas e fluxo de caixa](screenshots/painel.png)
+![Prévia ilustrativa do dashboard Vio Finanças, com cartões de saldo, receitas, despesas e fluxo de caixa](screenshots/painel.svg)
 
-*Prévia visual do layout do dashboard, exibida com valores zerados e sem dados pessoais.*
+*Ilustração do layout do dashboard, exibida com valores zerados e sem dados pessoais.*
 
 O painel concentra as informações mais importantes em cartões, gráficos e seções que facilitam a leitura do seu dinheiro.
 
