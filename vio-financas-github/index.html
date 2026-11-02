@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#08060d">
+  <meta name="description" content="Um novo olhar para suas finanças. Organize receitas, despesas, agendamentos e metas com o Vio.">
+  <title>Vio — Um novo olhar para suas finanças</title>
+  <script>
+    try {
+      const tema = localStorage.getItem("vio-tema");
+      if (tema === "light" || tema === "dark") {
+        document.documentElement.dataset.theme = tema;
+      }
+    } catch {}
+  </script>
+  <link rel="stylesheet" href="visual.css">
+  <link rel="stylesheet" href="assets/vio-ui.css">
+  <link rel="stylesheet" href="v2.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0" integrity="sha384-UagCvVPT5XXA0Hx+nJYUAGBFseHT9zBgpJMSebsAxl9lciTwbT+39j5VfRjdP5Tp" crossorigin="anonymous"></script>
+  <script defer src="config.js"></script>
+  <script defer src="finance-core.js"></script>
+  <script defer src="reports-ui.js"></script>
+  <script defer src="app.js"></script>
+  <script type="module" src="assets/vio-ui.js"></script>
+</head>
+<body>
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="ico-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="ico-arrows" viewBox="0 0 24 24"><path d="M4 7h16m-4-4 4 4-4 4M20 17H4m4-4-4 4 4 4"/></symbol>
+    <symbol id="ico-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M7 16v-5m5 5V6m5 10V9"/></symbol>
+    <symbol id="ico-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 4h2m4 0h2m-8 3h2"/></symbol>
+    <symbol id="ico-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="ico-arrow" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol>
+    <symbol id="ico-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="ico-wallet" viewBox="0 0 24 24"><path d="M20 8V5a2 2 0 0 0-2-2H5a3 3 0 0 0 0 6h15v11H5a3 3 0 0 1-3-3V6"/><path d="M20 12h-5v5h5"/></symbol>
+    <symbol id="ico-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></symbol>
+    <symbol id="ico-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="ico-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="ico-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 6a8 8 0 0 1 13 3M4.9 15a8 8 0 0 0 13 3"/></symbol>
+    <symbol id="ico-out" viewBox="0 0 24 24"><path d="M9 3H4v18h5m5-14 5 5-5 5m-7-5h12"/></symbol>
+  </svg>
+
+  <div class="carregamento" id="carregamento" role="status">
+    <span class="marca">vio<span class="marca-barra">/</span></span>
+    <span class="loading-line" aria-hidden="true"></span>
+    <p>Preparando seu espaço...</p>
+  </div>
+
+  <section class="pagina-auth" id="auth-view" hidden>
+    <div class="auth-layout">
+      <div class="auth-apresentacao">
+        <div class="linha auth-topo">
+          <a class="marca" href="#" aria-label="Vio, início">vio<span class="marca-barra">/</span></a>
+          <button class="botao secundario tema-auth" type="button" data-theme-toggle>Tema claro</button>
+        </div>
+
+        <div class="auth-texto">
+          <span class="sobretitulo"><span class="status-dot"></span> UM NOVO OLHAR PARA SUAS FINANÇAS</span>
+          <h1>Mais clareza.<br>Mais <em>possibilidades.</em></h1>
+          <p class="texto-suave">Seu dinheiro merece um lugar à altura dos seus planos. Encontre equilíbrio entre o que entra, o que sai e o que vem pela frente.</p>
+          <div class="auth-beneficios">
+            <span><svg class="icone"><use href="#ico-arrows"/></svg> Movimentações</span>
+            <span><svg class="icone"><use href="#ico-chart"/></svg> Perspectiva</span>
+            <span><svg class="icone"><use href="#ico-target"/></svg> Seus objetivos</span>
+          </div>
+        </div>
+
+        <div class="auth-rodape">
+          <span class="auth-rodape-marca">Feito para a sua próxima fase.</span>
+          <span>Seu dinheiro. Sua direção.</span>
+        </div>
+      </div>
+
+      <div class="auth-card">
+        <div class="auth-card-topo">
+          <span class="auth-lock"><svg class="icone"><use href="#ico-lock"/></svg></span>
+          <span class="selo">UM ESPAÇO SÓ SEU</span>
+        </div>
+
+        <h2 id="auth-title">Bem-vindo de volta.</h2>
+        <p class="texto-suave auth-description" id="auth-description">Entre para acompanhar suas finanças.</p>
+
+        <div class="auth-abas" aria-label="Tipo de acesso">
+          <button class="ativo" type="button" data-auth-mode="login" aria-pressed="true">Entrar</button>
+          <button type="button" data-auth-mode="cadastro" aria-pressed="false">Criar conta</button>
+        </div>
+
+        <form class="pilha" id="auth-form">
+          <div class="campo">
+            <label for="auth-email">Seu e-mail</label>
+            <input id="auth-email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+          </div>
+          <div class="campo">
+            <label for="auth-password">Senha</label>
+            <div class="campo-senha">
+              <input id="auth-password" type="password" autocomplete="current-password" placeholder="Digite sua senha" required>
+              <button id="revelar-senha" type="button" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button>
+            </div>
+          </div>
+          <button class="botao auth-submit" id="auth-submit" type="submit" disabled>Entrar na minha conta ↗</button>
+        </form>
+
+        <p class="mensagem" id="auth-status" role="status" aria-live="polite"></p>
+        <p class="nota-auth"><svg class="icone"><use href="#ico-lock"/></svg> Cada conta tem seu próprio espaço.</p>
+      </div>
+    </div>
+    <span class="auth-orbit orbit-one" aria-hidden="true"></span>
+    <span class="auth-orbit orbit-two" aria-hidden="true"></span>
+  </section>
+
+  <section class="pagina-app" id="app-view" hidden>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="marca" href="#inicio" aria-label="Vio, início">vio<span class="marca-barra">/</span></a>
+        <div class="workspace"><span class="workspace-avatar">P</span><div><strong>Meu espaço</strong><span>Finanças pessoais</span></div><span class="workspace-dots" aria-hidden="true">···</span></div>
+        <p class="sobretitulo sidebar-label">VISÃO DO SEU DINHEIRO</p>
+        <div id="line-sidebar-root"><nav aria-label="Navegação principal">
+          <a href="#inicio" class="nav-inicio"><svg class="icone"><use href="#ico-home"/></svg><span>Visão geral</span></a>
+          <a href="#historico"><svg class="icone"><use href="#ico-arrows"/></svg><span>Movimentações</span></a>
+          <a href="#categorias"><svg class="icone"><use href="#ico-chart"/></svg><span>Categorias</span></a>
+          <a href="#relatorios"><svg class="icone"><use href="#ico-calendar"/></svg><span>Relatórios</span></a>
+        </nav></div>
+        <div class="sidebar-mensagem"><svg class="icone"><use href="#ico-target"/></svg><p>Pequenos passos.<br><strong>Grandes possibilidades.</strong></p></div>
+        <div class="sidebar-conta">
+          <span class="texto-suave">CONECTADO COMO</span>
+          <p id="conta-email"></p>
+          <button class="botao secundario" id="sair" type="button"><svg class="icone"><use href="#ico-out"/></svg>Sair da conta</button>
+        </div>
+      </aside>
+
+      <main id="inicio">
+        <header class="topbar">
+          <span class="breadcrumb">Meu espaço <span>/</span> <strong>Visão geral</strong></span>
+          <div class="acoes">
+            <button class="botao secundario" type="button" data-theme-toggle>Tema claro</button>
+            <button class="botao secundario botao-atualizar" id="sincronizar" type="button"><svg class="icone"><use href="#ico-refresh"/></svg>Atualizar</button>
+          </div>
+        </header>
+
+        <div class="cabecalho-pagina">
+          <div>
+            <p class="sobretitulo">CLAREZA EM CADA MOVIMENTO</p>
+            <h1>Dashboard financeiro<span>.</span></h1>
+            <p class="texto-suave conexao" id="conexao">Conectando...</p>
+          </div>
+          <button class="botao principal" id="nova-transacao" type="button"><svg class="icone"><use href="#ico-plus"/></svg>Nova movimentação</button>
+        </div>
+
+        <p class="mensagem app-mensagem" id="app-status" role="status" aria-live="polite"></p>
+        <p class="aviso-legados" id="aviso-legados" role="status" hidden></p>
+
+        <div class="linha faixa-periodo">
+          <h2 class="titulo-secao">Um olhar sobre o seu saldo</h2>
+          <label class="periodo-label"><svg class="icone" aria-hidden="true"><use href="#ico-calendar"/></svg><span class="sr-only">Período</span><select id="periodo"><option value="todos">Todo o período</option><option value="mes">Este mês</option><option value="mes-especifico">Escolher mês</option><option value="ano">Escolher ano</option><option value="personalizado">Intervalo personalizado</option></select></label>
+        </div>
+        <div class="filtros-datas">
+          <label class="campo" id="campo-periodo-mes" hidden>Mês<input id="periodo-mes" type="month" min="1900-01" max="9999-12"></label>
+          <label class="campo" id="campo-periodo-ano" hidden>Ano<input id="periodo-ano" type="number" min="1900" max="9999" step="1"></label>
+          <div class="intervalo-datas" id="campo-periodo-intervalo" hidden><label class="campo">De<input id="periodo-inicio" type="date" min="1900-01-01" max="9999-12-31"></label><label class="campo">Até<input id="periodo-fim" type="date" min="1900-01-01" max="9999-12-31"></label></div>
+        </div>
+        <p class="texto-suave ajuda-periodo" id="periodo-descricao"></p>
+
+        <section class="resumo" aria-label="Resumo financeiro">
+          <article class="card estatistica saldo-card"><div class="stat-top"><h2>Saldo disponível</h2><svg class="icone"><use href="#ico-wallet"/></svg></div><p id="saldo">R$ 0,00</p><span class="texto-suave">Recebido − pago − guardado</span><svg class="metric-spark spark-saldo" id="trend-saldo" viewBox="0 0 180 42" role="img" aria-label="Evolução do saldo disponível no período"></svg></article>
+          <article class="card estatistica"><div class="stat-top"><h2>Receitas</h2><span class="stat-arrow" aria-hidden="true">↗</span></div><p id="receitas">R$ 0,00</p><span class="texto-suave" id="receitas-contagem">0 recebimentos</span><svg class="metric-spark spark-receitas" id="trend-receitas" viewBox="0 0 180 42" role="img" aria-label="Evolução das receitas no período"></svg></article>
+          <article class="card estatistica"><div class="stat-top"><h2>Despesas</h2><span class="stat-arrow" aria-hidden="true">↙</span></div><p id="despesas">R$ 0,00</p><span class="texto-suave" id="despesas-contagem">0 pagamentos</span><svg class="metric-spark spark-despesas" id="trend-despesas" viewBox="0 0 180 42" role="img" aria-label="Evolução das despesas no período"></svg></article>
+          <article class="card estatistica"><div class="stat-top"><h2>Economia reservada</h2><svg class="icone"><use href="#ico-target"/></svg></div><p id="economia">R$ 0,00</p><span class="texto-suave" id="economia-taxa">Marcado como guardado</span><svg class="metric-spark spark-economia" id="trend-economia" viewBox="0 0 180 42" role="img" aria-label="Evolução da economia reservada no período"></svg></article>
+        </section>
+        <p class="texto-suave resumo-pendencias" id="resumo-pendencias"></p>
+
+        <div class="dashboard-grid">
+          <div class="coluna-principal">
+            <section class="card chart-card" aria-labelledby="chart-title">
+              <div class="linha chart-heading"><div><p class="sobretitulo panel-eyebrow">PAINEL INTERATIVO</p><h2 class="titulo-secao" id="chart-title">Fluxo de caixa</h2></div><button class="botao secundario chart-expand" id="chart-expand" type="button" aria-label="Ampliar gráfico">⤢ <span>Ampliar</span></button></div>
+              <nav class="chart-tabs" aria-label="Escolher gráfico financeiro">
+                <button type="button" data-chart="saldo" aria-pressed="true">Saldo</button>
+                <button type="button" data-chart="receitas" aria-pressed="false">Receitas</button>
+                <button type="button" data-chart="despesas" aria-pressed="false">Despesas</button>
+                <button type="button" data-chart="guardado" aria-pressed="false">Reservas</button>
+              </nav>
+              <div class="chart-main-summary"><p class="valor-grafico" id="grafico-total">R$ 0,00</p><span class="chart-legend"><span></span><span id="chart-legend-label">Disponível acumulado</span></span></div>
+              <svg id="grafico" viewBox="0 0 700 220" role="img" aria-label="Evolução do saldo por movimentação" tabindex="0"></svg>
+              <div class="chart-empty-state" id="chart-empty-state" hidden><span class="chart-empty-icon" aria-hidden="true">↗</span><p>Seu gráfico aparece aqui quando registrar entradas ou despesas.</p><button class="botao secundario botao-pequeno" id="chart-empty-action" type="button">Adicionar primeira movimentação</button></div>
+              <div class="chart-footer"><p class="texto-suave legenda" id="chart-hint">Passe o cursor sobre o gráfico para destacar. Use as setas para navegar e dê duplo clique para ampliar.</p><div class="chart-navigation"><button class="chart-step" id="chart-prev" type="button" aria-label="Gráfico anterior">‹</button><span id="chart-position">1 / 4</span><button class="chart-step" id="chart-next" type="button" aria-label="Próximo gráfico">›</button></div></div>
+            </section>
+
+            <section class="card history-card" id="historico" aria-labelledby="history-title">
+              <div class="linha"><h2 class="titulo-secao" id="history-title">Movimentações</h2><div class="acoes"><span class="count-badge" id="total-registros">0 registros</span><button class="botao secundario botao-pequeno" id="exportar-historico" type="button">CSV</button></div></div>
+              <div class="filtros"><label class="campo-busca"><svg class="icone" aria-hidden="true"><use href="#ico-search"/></svg><input id="busca" type="search" placeholder="Buscar movimentação..." aria-label="Buscar movimentação"></label><select id="filtro-tipo" aria-label="Filtrar por tipo"><option value="todos">Todos os tipos</option><option value="receita">Receitas</option><option value="despesa">Despesas</option></select></div>
+              <label class="filtro-status"><span class="texto-suave">Status</span><select id="filtro-status"><option value="todos">Todos</option><option value="pendente">A confirmar</option><option value="guardado">Com reserva</option><option value="confirmado">Confirmados</option><option value="atrasado">Atrasados</option><option value="agendado">Agendados</option></select></label>
+              <div class="tabela-container"><table><thead><tr><th>Descrição</th><th>Valor</th><th>Data</th><th>Status</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody id="lista-transacoes"></tbody></table></div>
+              <p class="vazio" id="historico-vazio">Sua próxima movimentação começa aqui.</p>
+            </section>
+          </div>
+
+          <aside class="coluna-direita">
+            <section class="card expenses-card" id="despesas-painel" aria-labelledby="expenses-title">
+              <p class="sobretitulo panel-eyebrow">CADA ESCOLHA CONTA</p><h2 class="titulo-secao" id="expenses-title">Por onde seu dinheiro vai</h2>
+              <div class="donut-container"><svg id="donut" viewBox="0 0 160 160" role="img" aria-label="Despesas por categoria"></svg><div class="donut-centro"><strong id="donut-total">R$ 0,00</strong><span class="texto-suave">Despesas no período</span></div></div>
+              <div class="lista-categorias-topo"><span>Categoria</span><span>Total</span></div><div id="categorias-lista"></div>
+            </section>
+
+            <section class="card payments-card" id="pagamentos" aria-labelledby="payments-title"><div class="linha"><h2 class="titulo-secao" id="payments-title">Pagamentos a confirmar</h2><svg class="icone icone-suave"><use href="#ico-calendar"/></svg></div><div id="pagamentos-lista"></div><button class="botao secundario botao-pequeno" id="ver-pendentes" type="button">Ver todos os pendentes</button></section>
+
+            <section class="card goal-card" id="metas" aria-labelledby="goal-title">
+              <div class="linha"><h2 class="titulo-secao" id="goal-title">Seu próximo objetivo</h2><span class="etiqueta" id="meta-percentual">0%</span></div>
+              <p class="texto-suave legenda">Uma meta para o dinheiro que você marcou como guardado no período.</p>
+              <p class="meta-texto" id="meta-texto">Defina seu próximo objetivo.</p><progress id="meta-progresso" value="0" max="100" aria-label="Progresso da meta"></progress>
+              <form class="pilha form-meta" id="form-meta"><label for="meta-valor">Objetivo em reais</label><input id="meta-valor" type="text" inputmode="decimal" data-moeda placeholder="Ex.: 10.000,00" required><button class="botao secundario" id="salvar-meta" type="submit">Salvar meta <span aria-hidden="true">↗</span></button></form>
+            </section>
+          </aside>
+        </div>
+
+        <section class="card secao-v2" id="categorias" aria-labelledby="categories-title"><div class="linha"><div><p class="sobretitulo panel-eyebrow">DO SEU JEITO</p><h2 class="titulo-secao" id="categories-title">Suas categorias</h2></div><button class="botao secundario" id="nova-categoria" type="button">+ Criar categoria</button></div><p class="texto-suave legenda">Categorias próprias ficam na sua conta. As categorias padrão continuam disponíveis.</p><div id="gerenciar-categorias" class="grade-categorias"></div></section>
+
+        <section class="card secao-v2" id="relatorios" aria-labelledby="reports-title"><div class="linha"><div><p class="sobretitulo panel-eyebrow">DECISÕES COM CONTEXTO</p><h2 class="titulo-secao" id="reports-title">Relatórios financeiros</h2></div><div class="acoes"><button class="botao secundario" id="exportar-csv" type="button">Exportar CSV</button><button class="botao secundario" id="exportar-pdf" type="button">Baixar PDF</button></div></div><p class="texto-suave legenda" id="relatorio-periodo"></p><p id="analise-mensal" class="analise-mensal"></p><div class="graficos-relatorio"><div><h3 class="titulo-secao">Comparativo mensal</h3><p class="legenda-comparativo"><span>● Receitas</span><span>● Despesas</span><span>● Guardado</span></p><svg id="grafico-comparativo" viewBox="0 0 600 250" role="img" aria-label="Receitas, despesas e reservas por mês"></svg></div><div><h3 class="titulo-secao">Despesas por categoria</h3><svg id="grafico-categorias" viewBox="0 0 500 250" role="img" aria-label="Comparação de despesas confirmadas por categoria"></svg></div></div><div class="tabela-container"><table class="tabela-relatorio"><thead><tr><th>Mês</th><th>Recebido</th><th>Pago</th><th>Guardado</th><th>Disponível</th><th>A receber</th><th>A pagar</th></tr></thead><tbody id="relatorio-meses"></tbody></table></div><p class="texto-suave legenda">Confirmados são agrupados pela data efetiva; pendentes, pela data prevista. Valores sem data aparecem em uma linha própria no período completo.</p></section>
+
+        <footer class="rodape linha"><span><span class="status-dot"></span>Seus dados, sincronizados com sua conta.</span><button class="botao secundario" id="importar" type="button" hidden>Importar lançamentos antigos</button><span class="footer-wordmark" aria-hidden="true">vio /</span></footer>
+      </main>
+    </div>
+  </section>
+
+  <dialog class="chart-dialog" id="chart-dialog" aria-labelledby="chart-dialog-title">
+    <div class="linha"><div><p class="sobretitulo panel-eyebrow">VISUALIZAÇÃO AMPLIADA</p><h2 class="titulo-secao" id="chart-dialog-title">Fluxo de caixa</h2></div><button class="botao secundario" id="chart-dialog-close" type="button" aria-label="Fechar gráfico">×</button></div>
+    <svg id="grafico-ampliado" viewBox="0 0 700 220" role="img"></svg>
+  </dialog>
+
+  <dialog class="modal" id="modal-transacao" aria-labelledby="transaction-title">
+    <div class="linha"><div><p class="sobretitulo panel-eyebrow">CADA MOVIMENTO CONTA</p><h2 class="titulo-secao" id="transaction-title">Nova movimentação</h2></div><button class="botao secundario modal-close" id="fechar-modal" type="button" aria-label="Fechar formulário"><svg class="icone"><use href="#ico-close"/></svg></button></div>
+    <p id="modal-status" class="mensagem" data-modal-status role="status" aria-live="polite"></p>
+    <form class="pilha" id="form-transacao">
+      <div class="form-grid">
+        <div class="campo largura-total"><label for="descricao">Descrição</label><input id="descricao" maxlength="100" placeholder="Ex.: salário, mercado..." required></div>
+        <div class="campo"><label for="valor">Valor em reais</label><input id="valor" type="text" inputmode="decimal" data-moeda placeholder="1.234,56" required></div>
+        <div class="campo"><label for="tipo">Tipo</label><select id="tipo"><option value="receita">Receita</option><option value="despesa">Despesa</option></select></div>
+        <div class="campo"><label for="categoria">Categoria</label><select id="categoria"><option value="outros">Outros</option><option value="salario">Salário</option><option value="moradia">Moradia</option><option value="alimentacao">Alimentação</option><option value="transporte">Transporte</option><option value="lazer">Lazer</option><option value="saude">Saúde</option></select></div>
+        <div class="campo"><label for="data">Data prevista / vencimento</label><input id="data" type="date" min="1900-01-01" max="9999-12-31" required></div>
+        <div class="campo"><label for="status">Confirmação</label><select id="status"><option value="pendente">Pendente de confirmação</option><option value="confirmado">Confirmado: pago / recebido</option></select></div>
+        <div class="campo" id="campo-data-efetiva" hidden><label for="data-efetiva">Data do pagamento / recebimento</label><input id="data-efetiva" type="date" min="1900-01-01"></div>
+        <div class="campo largura-total" id="campo-guardado" hidden><label for="guardado">Quanto deste recebimento foi guardado?</label><input id="guardado" type="text" inputmode="decimal" data-moeda placeholder="0,00"><span class="texto-suave legenda">Informe zero quando o dinheiro não estiver reservado. A reserva é descontada do saldo disponível.</span></div>
+      </div>
+      <p class="texto-suave legenda">O vencimento nunca confirma um pagamento. Só os lançamentos explicitamente confirmados entram nos valores realizados.</p>
+      <button class="botao principal" id="salvar-transacao" type="submit">Salvar movimentação <svg class="icone"><use href="#ico-arrow"/></svg></button>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="modal-confirmacao" aria-labelledby="confirmation-title"><div class="linha"><h2 class="titulo-secao" id="confirmation-title">Confirmar pagamento</h2><button class="botao secundario" type="button" data-fechar-dialog aria-label="Fechar confirmação">×</button></div><p id="confirmacao-resumo" class="meta-texto"></p><p id="confirmacao-status" class="mensagem" data-modal-status role="status" aria-live="polite"></p><form class="pilha" id="form-confirmacao"><div class="campo"><label for="confirmacao-data">Quando foi pago / recebido?</label><input id="confirmacao-data" type="date" min="1900-01-01" required></div><button class="botao principal" id="confirmar-movimentacao" type="submit">Confirmar</button></form></dialog>
+
+  <dialog class="modal" id="modal-categoria" aria-labelledby="category-title"><div class="linha"><h2 class="titulo-secao" id="category-title">Nova categoria</h2><button class="botao secundario" type="button" data-fechar-dialog aria-label="Fechar categoria">×</button></div><p id="categoria-status" class="mensagem" data-modal-status role="status" aria-live="polite"></p><form class="pilha" id="form-categoria"><div class="campo"><label for="categoria-nome">Nome</label><input id="categoria-nome" maxlength="50" required></div><div class="campo"><label for="categoria-cor">Cor de identificação</label><input id="categoria-cor" type="color" value="#a855f7" required></div><button class="botao principal" id="salvar-categoria" type="submit">Salvar categoria</button></form></dialog>
+</body>
+</html>

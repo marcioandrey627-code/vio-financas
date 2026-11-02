@@ -1,0 +1,53 @@
+/* Extensões funcionais do Vio 2.0. A paleta e os cartões vêm de visual.css. */
+[hidden] { display: none !important; }
+.periodo-campos { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: end; gap: 12px; margin: 12px 0; }
+.periodo-campos label, .intervalo-datas { display: flex; gap: 8px; align-items: center; }
+.periodo-campos input { width: auto; min-height: 36px; padding: 8px 10px; }
+.periodo-ajuda, .resumo-pendencias { color: var(--muted); font-size: 11px; line-height: 1.7; margin: 12px 0; }
+.aviso-legados { padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--soft); line-height: 1.6; font-size: 12px; }
+.detalhe-transacao { display: block; color: var(--muted); margin-top: 5px; font-size: 10px; font-weight: 400; }
+.acoes-transacao { min-width: 180px; }
+.acoes-transacao .excluir { margin: 2px 5px 2px 0; padding: 6px 4px; }
+.confirmar { color: var(--accent); }
+.estado-atrasado { color: #ef9cae; background: rgba(225,68,103,.12); }
+html[data-theme="light"] .estado-atrasado { color: #a32143; }
+.estado-pendente, .estado-agendado { color: var(--muted); }
+.estado-confirmado { color: var(--accent); }
+.filtros { flex-wrap: wrap; }
+.filtro-status { display: flex; align-items: center; gap: 8px; }
+.pagamento .confirmar { padding: 4px; font-size: 10px; }
+.pagamento > div { min-width: 0; }
+.pagamento p { overflow-wrap: anywhere; }
+.gerenciar-categorias { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin-top: 20px; }
+.categoria-gerenciada { display: flex; flex-direction: column; align-items: start; gap: 10px; padding: 16px; border: 1px solid var(--border); border-radius: 10px; min-width: 0; }
+.categoria-gerenciada strong { font-size: 12px; overflow-wrap: anywhere; }
+.categoria-gerenciada strong .ponto { display: inline-block; margin-right: 8px; }
+.categoria-gerenciada small { color: var(--muted); font-size: 10px; }
+.categoria-acoes { display: flex; gap: 18px; }
+.categoria-acoes button:disabled { opacity: .4; cursor: not-allowed; }
+.relatorios-secao, .categorias-secao { margin-top: 24px; scroll-margin-top: 20px; }
+.relatorio-acoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.relatorio-analise { color: var(--muted); font-size: 12px; line-height: 1.8; margin: 18px 0; }
+.relatorio-graficos { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 20px; margin: 20px 0; }
+.relatorio-graficos > div { min-width: 0; }
+.relatorio-graficos svg { width: 100%; height: auto; display: block; overflow: visible; }
+.relatorio-graficos h3 { font-size: 12px; font-weight: 500; margin-bottom: 12px; }
+.modal .ajuda-formulario { font-size: 11px; line-height: 1.7; color: var(--muted); }
+.modal input[type="color"] { height: 44px; width: 100%; padding: 4px; }
+#confirmacao-resumo { line-height: 1.8; font-size: 13px; color: var(--muted); margin: 18px 0; }
+#modal-confirmacao form, #modal-categoria form { display: grid; gap: 18px; }
+@media(max-width:1000px) {
+  .gerenciar-categorias { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:600px) {
+  .periodo-campos { justify-content: flex-start; }
+  .periodo-campos label, .intervalo-datas { flex-wrap: wrap; }
+  .periodo-campos input { max-width: 155px; font-size: 12px; }
+  .relatorio-graficos, .gerenciar-categorias { grid-template-columns: minmax(0,1fr); }
+  .relatorios-secao > .linha, .categorias-secao > .linha { flex-wrap: wrap; gap: 16px; }
+  .resumo-pendencias { font-size: 10px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior: auto !important; }
+  .line-sidebar * { transition: none !important; }
+}

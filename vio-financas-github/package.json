@@ -1,0 +1,22 @@
+{
+  "name": "vio-financas",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-ui.mjs && node scripts/prepare-dist.mjs",
+    "build:ui": "node scripts/build-ui.mjs",
+    "test": "node --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "jspdf": "4.2.1",
+    "jspdf-autotable": "5.0.9",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
