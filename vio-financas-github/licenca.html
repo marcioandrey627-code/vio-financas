@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Licença MIT do código original do Vio Finanças, desenvolvido por Marcio Andrey.">
+  <meta name="theme-color" content="#08060d">
+  <title>Licença MIT — Vio Finanças</title>
+  <script>
+    try {
+      const tema = localStorage.getItem("vio-tema");
+      if (tema === "light" || tema === "dark") {
+        document.documentElement.dataset.theme = tema;
+      }
+    } catch {}
+  </script>
+  <link rel="stylesheet" href="visual.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    .conteudo-licenca { width: min(900px, calc(100% - 40px)); margin: 48px auto; }
+    .licenca-topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 48px; }
+    .conteudo-licenca h1 { margin: 12px 0 20px; font-size: clamp(28px, 5vw, 44px); line-height: 1.2; }
+    .conteudo-licenca h2 { margin: 32px 0 12px; font-size: 18px; }
+    .conteudo-licenca p { margin: 12px 0; line-height: 1.8; }
+    .texto-licenca { margin: 24px 0; padding: clamp(16px, 4vw, 32px); border: 1px solid var(--border); border-radius: 16px; background: var(--card); color: var(--text); white-space: pre-wrap; overflow-wrap: anywhere; font: 13px/1.8 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .credito-licenca { padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <main class="conteudo-licenca">
+    <header class="licenca-topo">
+      <a class="marca" href="./" aria-label="Vio, início">vio<span class="marca-barra">/</span></a>
+      <a class="botao secundario" href="./">Voltar ao Vio</a>
+    </header>
+    <p class="sobretitulo">CÓDIGO E AUTORIA</p>
+    <h1>Licença MIT</h1>
+    <p class="texto-suave">O código original do Vio Finanças, desenvolvido por Marcio Andrey, está disponível sob a licença MIT.</p>
+    <p class="texto-suave">Você pode usar, copiar, modificar e distribuir esse código, inclusive comercialmente, desde que mantenha os avisos de autoria e de licença. Consulte os termos completos abaixo.</p>
+    <h2 id="termos-licenca">Termos completos</h2>
+    <pre class="texto-licenca" lang="en" aria-labelledby="termos-licenca">MIT License
+
+Copyright (c) 2026 Marcio Andrey
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</pre>
+    <h2>Materiais de terceiros</h2>
+    <p class="texto-suave">Bibliotecas, componentes e outros materiais de terceiros permanecem sujeitos às respectivas licenças e avisos de autoria. A licença acima se aplica ao código original do Vio Finanças.</p>
+    <p><a class="licenca-link" href="https://github.com/marcioandrey627-code/vio-financas/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Consultar a licença no GitHub (abre em nova aba)</a></p>
+    <footer class="credito-licenca">© 2026 Marcio Andrey · Vio Finanças</footer>
+  </main>
+</body>
+</html>

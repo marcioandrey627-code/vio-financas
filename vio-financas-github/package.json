@@ -2,6 +2,7 @@
   "name": "vio-financas",
   "version": "2.0.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "node scripts/build-ui.mjs && node scripts/prepare-dist.mjs",
     "build:ui": "node scripts/build-ui.mjs",

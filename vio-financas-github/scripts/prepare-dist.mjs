@@ -7,7 +7,7 @@ const dist = join(root, 'dist');
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 for (const file of [
-  'index.html', 'app.js', 'config.js', 'finance-core.js',
+  'index.html', 'licenca.html', 'app.js', 'config.js', 'finance-core.js',
   'reports-ui.js', 'visual.css', 'v2.css', 'favicon.svg'
 ]) {
   await cp(join(root, file), join(dist, file));

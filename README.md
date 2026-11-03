@@ -58,6 +58,14 @@ Essas tecnologias compõem a interface, as funcionalidades financeiras, a autent
 
 O Vio Finanças é um projeto de desenvolvimento web voltado à organização financeira pessoal. Ele reúne **interface, experiência do usuário, visualização de dados e funcionalidades práticas** em uma mesma aplicação.
 
+## 📜 Licença
+
+O código original do Vio Finanças é distribuído sob a [Licença MIT](LICENSE).
+
+Copyright (c) 2026 Marcio Andrey. A licença permite usar, copiar, modificar e distribuir o código, inclusive comercialmente, mantendo os avisos de autoria e de licença.
+
+Bibliotecas, componentes e outros materiais de terceiros permanecem sujeitos às respectivas licenças e avisos de autoria. Os termos também estão disponíveis pela opção **Licença MIT** no site.
+
 ---
 
 <div align="center">

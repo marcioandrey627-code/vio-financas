@@ -468,3 +468,7 @@ progress::-moz-progress-bar { background: var(--accent); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Acesso aos termos de uso do código. */
+.licenca-link { display: inline-flex; align-items: center; min-height: 24px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.licenca-link:hover { color: var(--accent); }
